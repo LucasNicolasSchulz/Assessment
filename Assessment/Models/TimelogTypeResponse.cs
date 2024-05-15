@@ -4,6 +4,6 @@ namespace Assessment.Models
     {
         public int timelogTypeId { get; set; }
         public string timelogType { get; set; }
-        public int budget { get; set; }
+        public double budget { get; set; }
     }
 }

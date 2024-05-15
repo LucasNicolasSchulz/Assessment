@@ -12,7 +12,7 @@ namespace Assessment.Models
         public string timelogType { get; set; }
 
         // Budget muss grösser oder gleich 0 sein
-        [Range(0, int.MaxValue, ErrorMessage = "Das Zeitbudget darf nicht negativ sein")]
-        public int budget { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Das Zeitbudget darf nicht negativ ")]
+        public double budget { get; set; }
     }
 }
