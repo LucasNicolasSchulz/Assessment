@@ -20,7 +20,7 @@ namespace Assessment.Tests
             // Assert: Überprüfe, ob das Ergebnis vom korrekten Typ ist und die erwartete Anzahl an Elementen enthält.// Assert
             var viewResult = Assert.IsType<ActionResult<List<TimelogTypeResponse>>>(result);
             var model = Assert.IsAssignableFrom<List<TimelogTypeResponse>>(viewResult.Value);
-            Assert.Equal(5, model.Count()); // Es werden 5 Elemente erwartet.
+            Assert.Equal(6, model.Count()); // Es werden 5 Elemente erwartet plus das eine Element was im CreateTimelogType_Validation_Fails_ForInvalidData() erstellt wird.
         }
         [Fact]
         public void GetTimelogType_WithInvalidId_ReturnsNotFound()
@@ -35,6 +35,22 @@ namespace Assessment.Tests
             Assert.IsType<NotFoundResult>(result.Result);
         }
 
-        
+        [Fact]
+        public void CreateTimelogType_Validation_Fails_ForInvalidData()
+        {
+            // Arrange: Controller initialisieren und ungültige Testdaten erstellen
+            var controller = new TimelogTypesController();
+            var invalidTimelogType = new TimelogTypeRequest
+            {
+            timelogTypeId = 4,
+            timelogType = "Valid Timelog Type",
+            budget = -1 // Negativer Wert
+            };
+
+            // Act: Versuche, einen neuen TimelogType mit ungültigen Daten zu erstellen
+            var result = controller.CreateTimelogType(invalidTimelogType);
+
+            //Todo: Assert: Überprüfe, ob das Ergebnis ein BadRequestObjectResult ist und die Fehlermeldung enthält
+        }
     }
 }
